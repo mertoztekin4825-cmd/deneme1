@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitFuel | Sporcu Ürünleri</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-icon">🏋️‍♂️</span>
+        <span>FitFuel</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#urunler">Ürünler</a>
+        <a href="#abonelik">Üyelik</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
+      <div class="top-actions">
+        <button id="loginButton" class="ghost-button">Giriş Yap</button>
+        <button id="cartButton" class="cart-button" aria-label="Sepeti Aç">
+          🛒 <span id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Sporcu performansını zirveye taşı!</h1>
+          <p>
+            FitFuel ile hedeflerine uygun protein tozları, dambıllar, shaker ve
+            daha fazlasını hemen keşfet.
+          </p>
+          <button id="exploreButton" class="primary-button">
+            Ürünleri İncele
+          </button>
+        </div>
+        <img
+          src="https://images.unsplash.com/photo-1554344057-7d3d8a8c48d6?auto=format&fit=crop&w=900&q=80"
+          alt="Spor yapan kadın"
+          class="hero-image"
+        />
+      </section>
+
+      <section id="urunler" class="product-section">
+        <div class="section-header">
+          <h2>Öne Çıkan Ürünler</h2>
+          <p>Yüksek kalite sporcu ekipmanları ve takviyeleri</p>
+        </div>
+        <div id="productList" class="product-grid"></div>
+      </section>
+
+      <section id="abonelik" class="membership-section">
+        <div class="membership-card">
+          <h2>Üye Ol, Avantajları Kaçırma</h2>
+          <ul>
+            <li>Her ay özel indirim kuponları</li>
+            <li>Yeni ürünlerden ilk sen haberdar ol</li>
+            <li>Kişiye özel beslenme önerileri</li>
+          </ul>
+          <button id="membershipButton" class="primary-button">
+            Ücretsiz Üye Ol
+          </button>
+        </div>
+        <div class="membership-image">
+          <img
+            src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80"
+            alt="Sporcu ürünleri"
+          />
+        </div>
+      </section>
+
+      <section id="iletisim" class="contact-section">
+        <h2>Bizimle İletişime Geç</h2>
+        <form id="contactForm" class="contact-form">
+          <div class="form-field">
+            <label for="contactName">Ad Soyad</label>
+            <input id="contactName" name="name" type="text" required />
+          </div>
+          <div class="form-field">
+            <label for="contactEmail">E-posta</label>
+            <input id="contactEmail" name="email" type="email" required />
+          </div>
+          <div class="form-field">
+            <label for="contactMessage">Mesajın</label>
+            <textarea
+              id="contactMessage"
+              name="message"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="primary-button">Gönder</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>FitFuel</strong> © <span id="currentYear"></span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Gizlilik</a>
+        <a href="#">Kullanım Koşulları</a>
+        <a href="#">S.S.S.</a>
+      </div>
+    </footer>
+
+    <div class="modal" id="authModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" data-close>×</button>
+        <div class="tabs">
+          <button class="tab active" data-tab="login">Giriş</button>
+          <button class="tab" data-tab="register">Kayıt Ol</button>
+        </div>
+        <form id="loginForm" class="auth-form" data-content="login">
+          <div class="form-field">
+            <label for="loginEmail">E-posta</label>
+            <input id="loginEmail" name="email" type="email" required />
+          </div>
+          <div class="form-field">
+            <label for="loginPassword">Şifre</label>
+            <input
+              id="loginPassword"
+              name="password"
+              type="password"
+              minlength="6"
+              required
+            />
+          </div>
+          <button type="submit" class="primary-button">Giriş Yap</button>
+        </form>
+        <form
+          id="registerForm"
+          class="auth-form hidden"
+          data-content="register"
+        >
+          <div class="form-field">
+            <label for="registerName">Ad Soyad</label>
+            <input id="registerName" name="name" type="text" required />
+          </div>
+          <div class="form-field">
+            <label for="registerEmail">E-posta</label>
+            <input id="registerEmail" name="email" type="email" required />
+          </div>
+          <div class="form-field">
+            <label for="registerPassword">Şifre</label>
+            <input
+              id="registerPassword"
+              name="password"
+              type="password"
+              minlength="6"
+              required
+            />
+          </div>
+          <button type="submit" class="primary-button">Kayıt Ol</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="cartModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" data-close>×</button>
+        <h2>Sepetin</h2>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-summary">
+          <span>Toplam:</span>
+          <strong id="cartTotal">₺0,00</strong>
+        </div>
+        <button id="checkoutButton" class="primary-button full-width">
+          Satın Al
+        </button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
