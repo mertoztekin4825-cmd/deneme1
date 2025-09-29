@@ -1,0 +1,27 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="logo">Yeşil Market</a>
+    <form action="/search" method="get" class="search-form">
+      <input type="text" name="q" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>" placeholder="Ürün veya kategori ara">
+      <button type="submit">Ara</button>
+    </form>
+    <nav class="top-nav">
+      <a href="/cart">Sepet (<%= cartCount %>)</a>
+      <% if (!currentUser) { %>
+        <a href="/login">Giriş</a>
+        <a href="/register" class="btn-primary">Üye Ol</a>
+      <% } else { %>
+        <span class="welcome">Merhaba, <%= currentUser.name.split(' ')[0] %></span>
+        <a href="/profile">Profil</a>
+        <a href="/orders">Siparişler</a>
+        <% if (isAdmin) { %>
+          <a href="/admin">Yönetim</a>
+        <% } %>
+        <form action="/logout" method="post" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Çıkış</button>
+        </form>
+      <% } %>
+    </nav>
+  </div>
+</header>

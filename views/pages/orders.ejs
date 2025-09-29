@@ -1,0 +1,24 @@
+<section class="orders">
+  <h1>Siparişlerim</h1>
+  <% if (!orders.length) { %>
+    <p>Henüz siparişiniz bulunmuyor.</p>
+  <% } else { %>
+    <div class="order-list">
+      <% orders.forEach(function(order) { %>
+        <article class="order-card">
+          <header>
+            <h2>Sipariş #<%= order.id %></h2>
+            <span><%= formatDate(order.created_at) %></span>
+          </header>
+          <p><strong>Durum:</strong> <%= order.status %></p>
+          <p><strong>Tutar:</strong> <%= formatCurrency(order.total) %></p>
+          <ul>
+            <% order.items.forEach(function(item) { %>
+              <li><%= item.qty %> x <%= item.name %> — <%= formatCurrency(item.price) %></li>
+            <% }) %>
+          </ul>
+        </article>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
