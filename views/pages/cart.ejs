@@ -1,0 +1,41 @@
+<section class="cart">
+  <h1>Sepetiniz</h1>
+  <% if (!Object.keys(cart.items).length) { %>
+    <p>Sepetiniz boş. <a href="/">Alışverişe devam edin.</a></p>
+  <% } else { %>
+    <div class="cart-list">
+      <% Object.values(cart.items).forEach(function(item) { %>
+        <article class="cart-item">
+          <img src="<%= item.product.image %>" alt="<%= item.product.name %>">
+          <div class="cart-item-info">
+            <h2><a href="/product/<%= item.product.slug %>"><%= item.product.name %></a></h2>
+            <p><%= formatCurrency(item.product.price) %> / <%= item.product.unit %></p>
+            <form action="/cart/update" method="post" class="cart-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="product_id" value="<%= item.product.id %>">
+              <input type="number" name="qty" min="1" max="<%= item.product.stock %>" value="<%= item.qty %>">
+              <button type="submit">Güncelle</button>
+            </form>
+            <form action="/cart/remove" method="post" class="cart-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="product_id" value="<%= item.product.id %>">
+              <button type="submit" class="btn-link">Sil</button>
+            </form>
+          </div>
+          <div class="cart-item-total">
+            <strong><%= formatCurrency(item.qty * item.product.price) %></strong>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+    <aside class="cart-summary">
+      <h2>Özet</h2>
+      <ul>
+        <li>Ara Toplam: <span><%= formatCurrency(cart.totals.subtotal) %></span></li>
+        <li>KDV (%%8): <span><%= formatCurrency(cart.totals.tax) %></span></li>
+        <li>Genel Toplam: <span><%= formatCurrency(cart.totals.total) %></span></li>
+      </ul>
+      <a class="btn-primary" href="/checkout">Ödeme Yap</a>
+    </aside>
+  <% } %>
+</section>

@@ -1,0 +1,76 @@
+<section class="admin">
+  <h1>Reklam Yönetimi</h1>
+  <div class="admin-grid">
+    <form action="/admin/ad/create" method="post" enctype="multipart/form-data" class="form-card">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <h2>Yeni Reklam</h2>
+      <label>Başlık
+        <input type="text" name="title" required>
+      </label>
+      <label>Bağlantı
+        <input type="url" name="link" placeholder="https://">
+      </label>
+      <label>Pozisyon
+        <select name="position" required>
+          <option value="banner">Banner</option>
+          <option value="sidebar">Yan Panel</option>
+        </select>
+      </label>
+      <label>Görsel
+        <input type="file" name="image" accept="image/*">
+      </label>
+      <button type="submit" class="btn-primary">Kaydet</button>
+    </form>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Başlık</th>
+            <th>Pozisyon</th>
+            <th>Durum</th>
+            <th>İşlemler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ads.forEach(function(ad) { %>
+            <tr>
+              <td><strong><%= ad.title %></strong></td>
+              <td><%= ad.position %></td>
+              <td><%= ad.is_active ? 'Aktif' : 'Pasif' %></td>
+              <td>
+                <details>
+                  <summary>Düzenle</summary>
+                  <form action="/admin/ad/update" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="hidden" name="id" value="<%= ad.id %>">
+                    <label>Başlık
+                      <input type="text" name="title" value="<%= ad.title %>" required>
+                    </label>
+                    <label>Bağlantı
+                      <input type="url" name="link" value="<%= ad.link %>">
+                    </label>
+                    <label>Pozisyon
+                      <select name="position" required>
+                        <option value="banner" <%= ad.position === 'banner' ? 'selected' : '' %>>Banner</option>
+                        <option value="sidebar" <%= ad.position === 'sidebar' ? 'selected' : '' %>>Yan Panel</option>
+                      </select>
+                    </label>
+                    <label>Görsel (opsiyonel)
+                      <input type="file" name="image" accept="image/*">
+                    </label>
+                    <button type="submit">Güncelle</button>
+                  </form>
+                </details>
+                <form action="/admin/ad/toggle" method="post" class="inline-form">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <input type="hidden" name="id" value="<%= ad.id %>">
+                  <button type="submit" class="btn-link"><%= ad.is_active ? 'Pasifleştir' : 'Aktifleştir' %></button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

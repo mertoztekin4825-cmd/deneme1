@@ -1,0 +1,21 @@
+<section class="checkout">
+  <h1>Ödeme</h1>
+  <div class="checkout-grid">
+    <form action="/checkout" method="post" class="form-card">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Teslimat Adresi
+        <textarea name="address" rows="4" required placeholder="Adresinizi girin"></textarea>
+      </label>
+      <button type="submit" class="btn-primary">Siparişi Tamamla</button>
+    </form>
+    <aside class="cart-summary">
+      <h2>Sepet Özeti</h2>
+      <ul>
+        <li>Ürün Sayısı: <span><%= cart.totals.count %></span></li>
+        <li>Ara Toplam: <span><%= formatCurrency(cart.totals.subtotal) %></span></li>
+        <li>KDV (%%8): <span><%= formatCurrency(cart.totals.tax) %></span></li>
+        <li>Genel Toplam: <span><%= formatCurrency(cart.totals.total) %></span></li>
+      </ul>
+    </aside>
+  </div>
+</section>

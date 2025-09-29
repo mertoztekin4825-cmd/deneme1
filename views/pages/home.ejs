@@ -1,0 +1,75 @@
+<section class="hero">
+  <div class="hero-main">
+    <div class="hero-slider">
+      <% if (bannerAds.length) { %>
+        <% bannerAds.forEach(function(ad) { %>
+          <div class="slide">
+            <img src="<%= ad.image %>" alt="<%= ad.title %>">
+            <div class="slide-caption">
+              <h2><%= ad.title %></h2>
+              <% if (ad.link) { %>
+                <a href="<%= ad.link %>" class="btn-secondary">Keşfet</a>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>Yeni kampanyalar yolda...</p>
+      <% } %>
+    </div>
+    <aside class="hero-sidebar">
+      <% if (sideAds.length) { %>
+        <% sideAds.forEach(function(ad) { %>
+          <div class="sidebar-ad">
+            <img src="<%= ad.image %>" alt="<%= ad.title %>">
+            <h3><%= ad.title %></h3>
+          </div>
+        <% }) %>
+      <% } %>
+    </aside>
+  </div>
+</section>
+
+<section class="campaigns">
+  <h2>Kampanyalar</h2>
+  <ul>
+    <li>200 TL ve üzeri alışverişe ücretsiz kargo</li>
+    <li>Organik paketlerde %15 indirim</li>
+    <li>Her çarşamba taze meyve günü</li>
+  </ul>
+</section>
+
+<section class="categories">
+  <h2>Kategoriler</h2>
+  <div class="chip-list">
+    <% categories.forEach(function(category) { %>
+      <a class="chip" href="/search?q=<%= category.name %>"><%= category.name %></a>
+    <% }) %>
+  </div>
+</section>
+
+<section class="product-grid">
+  <h2>Öne Çıkan Ürünler</h2>
+  <div class="grid">
+    <% if (!products.length) { %>
+      <p>Bu kriterlere uygun ürün bulunamadı.</p>
+    <% } %>
+    <% products.forEach(function(product) { %>
+      <article class="product-card">
+        <a href="/product/<%= product.slug %>">
+          <img src="<%= product.image %>" alt="<%= product.name %>">
+        </a>
+        <div class="product-info">
+          <h3><a href="/product/<%= product.slug %>"><%= product.name %></a></h3>
+          <p class="price"><%= formatCurrency(product.price) %> / <%= product.unit %></p>
+          <form action="/cart/add" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="product_id" value="<%= product.id %>">
+            <input type="hidden" name="qty" value="1">
+            <button type="submit" class="btn-primary">Sepete Ekle</button>
+          </form>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

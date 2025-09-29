@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title ? title + ' • ' : '' %>Yeşil Market</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script defer src="/js/app.js"></script>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main class="container">
+    <% if (flash.error && flash.error.length) { %>
+      <div class="alert alert-error">
+        <% flash.error.forEach(function(msg) { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <% if (flash.success && flash.success.length) { %>
+      <div class="alert alert-success">
+        <% flash.success.forEach(function(msg) { %>
+          <p><%= msg %></p>
+        <% }) %>
+      </div>
+    <% } %>
+    <%- include(body) %>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

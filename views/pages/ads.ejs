@@ -1,0 +1,17 @@
+<section class="ads">
+  <h1>Aktif Reklamlar</h1>
+  <div class="grid">
+    <% if (!bannerAds.length) { %>
+      <p>Şu anda aktif reklam bulunmamaktadır.</p>
+    <% } %>
+    <% bannerAds.forEach(function(ad) { %>
+      <article class="ad-card">
+        <img src="<%= ad.image %>" alt="<%= ad.title %>">
+        <h2><%= ad.title %></h2>
+        <% if (ad.link) { %>
+          <a href="<%= ad.link %>" class="btn-secondary">Siteye Git</a>
+        <% } %>
+      </article>
+    <% }) %>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<section class="auth">
+  <h1>Giriş Yap</h1>
+  <form action="/login" method="post" class="form-card">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>E-posta
+      <input type="email" name="email" required>
+    </label>
+    <label>Şifre
+      <input type="password" name="password" required>
+    </label>
+    <button type="submit" class="btn-primary">Giriş Yap</button>
+    <p>Hesabınız yok mu? <a href="/register">Hemen üye olun.</a></p>
+  </form>
+</section>

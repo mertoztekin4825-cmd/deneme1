@@ -1,0 +1,18 @@
+<section class="product-detail">
+  <div class="detail-media">
+    <img src="<%= product.image %>" alt="<%= product.name %>">
+  </div>
+  <div class="detail-info">
+    <h1><%= product.name %></h1>
+    <p class="price"><%= formatCurrency(product.price) %> / <%= product.unit %></p>
+    <p><%= product.description %></p>
+    <form action="/cart/add" method="post" class="detail-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="hidden" name="product_id" value="<%= product.id %>">
+      <label>Adet
+        <input type="number" name="qty" min="1" max="<%= product.stock %>" value="1">
+      </label>
+      <button type="submit" class="btn-primary">Sepete Ekle</button>
+    </form>
+  </div>
+</section>
